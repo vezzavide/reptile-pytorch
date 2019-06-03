@@ -129,7 +129,8 @@ def do_learning(net, optimizer, train_iter, iterations):
         loss.backward()
         optimizer.step()
 
-    return loss.data[0]
+    #return loss.data[0]
+    return loss.item()
 
 
 def do_evaluation(net, test_iter, iterations):
@@ -151,8 +152,11 @@ def do_evaluation(net, test_iter, iterations):
         argmax = net.predict(prediction)
         accuracy = (argmax == labels).float().mean()
 
-        losses.append(loss.data[0])
-        accuracies.append(accuracy.data[0])
+        #losses.append(loss.data[0])
+        #accuracies.append(accuracy.data[0])
+        losses.append(loss.item())
+        accuracies.append(accuracy.item())
+
 
     return np.mean(losses), np.mean(accuracies)
 
